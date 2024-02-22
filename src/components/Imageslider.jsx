@@ -22,6 +22,7 @@ const ImagesSlider = () => {
   const handleClickPlus = () => {
     setCount(count == imageList.length - 1 ? 0 : count + 1);
   };
+  
   const handleClickminus = () => {
     setCount(count == 0 ? imageList.length - 1 : count - 1);
   };
