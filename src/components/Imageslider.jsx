@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import  { useState } from "react";
+import { useEffect, useState } from "react";
 import img1 from "/public/images/pic1.jpg";
 import img2 from "/public/images/pic2.jpg";
 import img3 from "/public/images/pic3.jpg";
@@ -12,16 +13,27 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const ImagesSlider = () => {
+  //react hook
   const [count, setCount] = useState(0);
-  
+   //array of images
   const imageList = [img2, img3, img1, img4, img5, img6, img7];
 
+  //count update functions
   const handleClickPlus = () => {
     setCount(count == imageList.length - 1 ? 0 : count + 1);
   };
   const handleClickminus = () => {
     setCount(count == 0 ? imageList.length - 1 : count - 1);
   };
+  
+  //automatically slider changes
+  useEffect(() => {
+    let timeClear = setTimeout(() => {
+      handleClickPlus();
+    }, 2000);
+    return () => clearTimeout(timeClear);
+  }, [count]);
+
   return (
     <>
       {imageList.map((img, i) => {
