@@ -2,7 +2,8 @@ import { Fragment, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Product = () => {
+const Product = ({getItem}) => {
+
   const [catetory, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
   const [value, setValue] = useState("");
@@ -64,6 +65,7 @@ const Product = () => {
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setAllProduct(searchfilter);
+    
     setSearchTerm("");
   };
 
@@ -127,7 +129,7 @@ const Product = () => {
                         <p className="mt-2  title-font text-gray-500 text-xs tracking-widest">
                           ${item.price}
                         </p>
-                        <button className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md">
+                        <button className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md" onClick={(e)=>getItem(e,item)}>
                           ADD TO CART
                         </button>
                       </div>
@@ -143,7 +145,7 @@ const Product = () => {
                   className="w-[250px] bg-slate-200 px-2 py-2 rounded-md bg-black/80"
                   key={item.id}
                 >
-                  <Link to={`/product/${item.id}`}>
+                  
                     <div className="block relative h-48 rounded overflow-hidden">
                       <img
                         alt="ecommerce"
@@ -159,12 +161,12 @@ const Product = () => {
                         <p className="mt-2  title-font text-gray-500 text-xs tracking-widest">
                           ${item.price}
                         </p>
-                        <button className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md">
+                        <button className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md" onClick={(e)=>getItem(e,item)}>
                           Add to cart
                         </button>
                       </div>
                     </div>
-                  </Link>
+                 
                 </div>
               ))}
             </div>

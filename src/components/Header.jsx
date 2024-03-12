@@ -1,23 +1,23 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <nav className="nav">
       <div className="container">
         <h1 className="logo">
-          <a href="#">Website</a>
+          <Link to="/">Website</Link>
         </h1>
         <ul>
           <li>
-            <a href="# current">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="#">About</a>
+            <Link to="/product">Product</Link>
           </li>
           <li>
-            <a href="#">Services</a>
+            <Link to="/cart">cart</Link>
           </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
+          
         </ul>
       </div>
     </nav>
