@@ -1,11 +1,36 @@
 /* eslint-disable react/prop-types */
 
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { context } from "../App";
 
-const Cart = ({ cart, qtnInc,qtnDec,total,removeitem }) => {
-  console.log(qtnInc);
-  console.log("api cart ==> ", cart);
-  console.log(total)
+const Cart = () => {
+ const {cart,setCart} = useContext(context);
+ 
+ const qtnInc =(id)=>{
+  let incQty = cart.map((item)=>{
+    return item.id==id ? {...item, qty : item.qty +1}:item;
+  })
+   setCart(incQty )
+ }
+
+ const qtnDec =(id)=>{
+  let decQty = cart.map((item)=>{
+    return item.id==id && item.qty>1? {...item, qty : item.qty - 1}:item;
+  })
+   setCart(decQty )
+ }
+
+ 
+  const total = cart.reduce((acc,item)=>{
+      return acc+item.price*item.qty+40
+  },0)
+  
+  const removeitem = (id)=>{
+    const newCart=cart.filter((item)=>item.id!==id)
+     setCart(newCart)
+
+  }
 
   return (
     <div className="container mx-auto mt-16">

@@ -1,8 +1,10 @@
-import { Fragment, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { Fragment, useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { context } from "../App";
 
-const Product = ({getItem}) => {
+const Product = () => {
 
   const [catetory, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
@@ -67,6 +69,19 @@ const Product = ({getItem}) => {
     setAllProduct(searchfilter);
     
     setSearchTerm("");
+  };
+  //context api 
+  const {cart,setCart} = useContext(context)
+  
+  const getItem = (e,item) => {
+    e.preventDefault()
+       const _cart = cart.find((matchItem)=>matchItem.id == item.id);
+    if(_cart){
+      const updatedCart = cart.map(product=> product.id==item.id? {...item,qty:product.qty+1}:item);
+      setCart(updatedCart)
+    }else{
+      setCart( [...cart,{...item,qty:1}]);
+    }
   };
 
   return (

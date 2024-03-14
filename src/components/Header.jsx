@@ -1,6 +1,9 @@
+
 import { Link } from "react-router-dom";
 
+
 const Header = () => {
+  
   return (
     <nav className="nav">
       <div className="container">
@@ -17,6 +20,7 @@ const Header = () => {
           <li>
             <Link to="/cart">cart</Link>
           </li>
+        
           
         </ul>
       </div>
