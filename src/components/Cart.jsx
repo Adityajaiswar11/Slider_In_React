@@ -62,7 +62,7 @@ const Cart = () => {
             >
               <div className="flex w-2/5">
                 <div className="w-20">
-                  <img className="h-24" src={item.thumbnail} alt="" />
+                  <img className="w-30 object-cover h-16 " src={item.thumbnail} alt="" />
                 </div>
                 <div className="flex flex-col justify-between ml-4 flex-grow">
                   <span className="font-bold text-sm">{item.brand}</span>
@@ -126,7 +126,7 @@ const Cart = () => {
             Order Summary
           </h1>
           <div className="flex justify-between mt-10 mb-5">
-            <span className="font-semibold text-sm uppercase">Items 3</span>
+            <span className="font-semibold text-sm uppercase">Items {cart.length}</span>
             <span className="font-semibold text-sm">{total}</span>
           </div>
           <div>

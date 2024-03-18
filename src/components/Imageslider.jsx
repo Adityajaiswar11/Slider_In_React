@@ -13,6 +13,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const ImagesSlider = () => {
+
   //react hook
   const [count, setCount] = useState(0);
    //array of images
@@ -29,17 +30,18 @@ const ImagesSlider = () => {
   
   //automatically slider changes
   useEffect(() => {
-    let timeClear = setTimeout(() => {
+    let timeClear =setInterval(() => {
       handleClickPlus();
     }, 2000);
-    return () => clearTimeout(timeClear);
+    return () => clearInterval(timeClear);
   }, [count]);
 
   return (
     <>
       {imageList.map((img, i) => {
         return (
-          <div className={`slider ${count == i ? "block" : "hidden"}`} key={i}>
+          
+          <div className={`slider relative ${count == i ? "block relative" : "hidden"}`} key={i}>
             <img src={img} alt="" />
             <div className="btn">
               <div className="icons" onClick={handleClickminus}>

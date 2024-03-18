@@ -92,7 +92,7 @@ const Product = () => {
       <section className="px-10">
         <div className="flex justify-around items-center mt-3">
           <select
-            className="block w-[250px] h-10 bg-white px-3 rounded-md"
+            className="block w-[270px] h-10 bg-white px-2 rounded-md border-2 focus:border-2  "
             onChange={(e) => categorychange(e.target.value)}
           >
             <option value="all" selected>
@@ -111,7 +111,7 @@ const Product = () => {
               placeholder="Search Products"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full block h-full px-2 rounded-sm bg-white border-none outline-none"
+              className="w-full block h-full px-2 rounded-sm bg-white  outline-none border focus:border-amber-600"
             />
             <button
               className="text-white bg-black  px-2 py-2 rounded-sm"

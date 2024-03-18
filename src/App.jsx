@@ -1,4 +1,3 @@
-
 import Header from "./components/Header";
 import Product from "./components/Product";
 import ImagesSlider from "./components/Imageslider";
@@ -7,29 +6,23 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
 import Cart from "./components/Cart";
+import Hero from "./components/Hero";
 
-const context= createContext()
+const context = createContext();
+
 
 function App() {
-
-  const [cart,setCart]=useState([])
-
- 
-
- 
-
-
-
+  const [cart, setCart] = useState([]);
   return (
-    <context.Provider
-     value={{cart,setCart}}>
+    <context.Provider value={{ cart, setCart }}>
       <BrowserRouter>
         <Header />
 
         <Routes>
           <Route path="/" exact element={<ImagesSlider />}></Route>
-          <Route path="/product"  element={<Product />}  />
-          <Route path="/cart"  element={<Cart/>} />
+          <Route path="/hero" exact element={<Hero/>}></Route>
+          <Route path="/product" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </context.Provider>
@@ -37,4 +30,4 @@ function App() {
 }
 
 export default App;
-export {context}
+export { context };
