@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { context } from "../App";
 
 const Product = () => {
-
   const [catetory, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
   const [value, setValue] = useState("");
@@ -60,27 +59,30 @@ const Product = () => {
       }
     };
     getAllProduct();
-  }, []);
+  }, [searchTerm]);
 
   const searchProduct = () => {
-    const searchfilter = allProduct.filter((product) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const searchfilter = allProduct.filter((product) => {
+      if (searchTerm == "") return true;
+      return product.title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
     setAllProduct(searchfilter);
-    
-    setSearchTerm("");
   };
-  //context api 
-  const {cart,setCart} = useContext(context)
-  
-  const getItem = (e,item) => {
-    e.preventDefault()
-       const _cart = cart.find((matchItem)=>matchItem.id == item.id);
-    if(_cart){
-      const updatedCart = cart.map(product=> product.id==item.id? {...item,qty:product.qty+1}:item);
-      setCart(updatedCart)
-    }else{
-      setCart( [...cart,{...item,qty:1}]);
+
+  //context api
+  const { cart, setCart } = useContext(context);
+
+  const getItem = (e, item) => {
+    e.preventDefault();
+    const _cart = cart.find((matchItem) => matchItem.id == item.id);
+    if (_cart) {
+      const updatedCart = cart.map((product) =>
+        product.id == item.id ? { ...item, qty: product.qty + 1 } : item
+      );
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, { ...item, qty: 1 }]);
     }
   };
 
@@ -109,7 +111,6 @@ const Product = () => {
             <input
               type="text"
               placeholder="Search Products"
-              value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full block h-full px-2 rounded-sm bg-white  outline-none border focus:border-amber-600"
             />
@@ -144,7 +145,10 @@ const Product = () => {
                         <p className="mt-2  title-font text-gray-500 text-xs tracking-widest">
                           ${item.price}
                         </p>
-                        <button className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md" onClick={(e)=>getItem(e,item)}>
+                        <button
+                          className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md"
+                          onClick={(e) => getItem(e, item)}
+                        >
                           ADD TO CART
                         </button>
                       </div>
@@ -160,28 +164,29 @@ const Product = () => {
                   className="w-[250px] bg-slate-200 px-2 py-2 rounded-md bg-black/80"
                   key={item.id}
                 >
-                  
-                    <div className="block relative h-48 rounded overflow-hidden">
-                      <img
-                        alt="ecommerce"
-                        className="object-cover object-center w-full h-full block"
-                        src={item.thumbnail}
-                      />
+                  <div className="block relative h-48 rounded overflow-hidden">
+                    <img
+                      alt="ecommerce"
+                      className="object-cover object-center w-full h-full block"
+                      src={item.thumbnail}
+                    />
+                  </div>
+                  <div className="mt-4 ">
+                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <p className="mt-2  title-font text-gray-500 text-xs tracking-widest">
+                        ${item.price}
+                      </p>
+                      <button
+                        className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md"
+                        onClick={(e) => getItem(e, item)}
+                      >
+                        Add to cart
+                      </button>
                     </div>
-                    <div className="mt-4 ">
-                      <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                        {item.title}
-                      </h3>
-                      <div className="flex items-center justify-between">
-                        <p className="mt-2  title-font text-gray-500 text-xs tracking-widest">
-                          ${item.price}
-                        </p>
-                        <button className="mt-2 mr-1 text-white/80 text-[10px] tracking-widest title-font bg-red-600 py-[6px] px-2 rounded-md" onClick={(e)=>getItem(e,item)}>
-                          Add to cart
-                        </button>
-                      </div>
-                    </div>
-                 
+                  </div>
                 </div>
               ))}
             </div>
